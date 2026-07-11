@@ -37,7 +37,7 @@ function goTo(i) {
   dots.forEach(d => d.classList.remove("active"));
   cur = (i + slides.length) % slides.length;
   slides[cur].classList.add("active");
-  dots[cur].classList.add("active");
+  if (dots[cur]) dots[cur].classList.add("active");
 }
 
 function autoPlay() {
@@ -75,12 +75,11 @@ function playVideo(card, url) {
 }
 
 // ── Header shrink on scroll ──
-let lastScroll = 0;
 window.addEventListener("scroll", () => {
   const header = document.querySelector(".header");
   if (!header) return;
   if (window.scrollY > 100) {
-    header.style.height = "64px";
+    header.style.height = "58px";
     header.style.boxShadow = "0 4px 20px rgba(0,0,0,.06)";
   } else {
     header.style.height = "";
@@ -88,31 +87,43 @@ window.addEventListener("scroll", () => {
   }
 }, { passive: true });
 
-// ── Booking Form Submission ──
+// ── Review Carousel: duplicate cards for infinite scroll ──
+const reviewTrack = document.getElementById("reviewTrack");
+if (reviewTrack) {
+  const cards = reviewTrack.innerHTML;
+  reviewTrack.innerHTML = cards + cards; // duplicate for seamless loop
+}
+
+// ── Booking Form → WhatsApp Redirect ──
 const bookingForm = document.getElementById("bookingForm");
-const formSuccess = document.getElementById("formSuccess");
 const bookPhone = document.getElementById("bookPhone");
 
-// Prevent typing non-numeric characters and restrict to exactly 10 digits
+// Restrict phone to 10 digits only
 bookPhone?.addEventListener("input", (e) => {
   let val = e.target.value.replace(/\D/g, "");
   if (val.length > 10) val = val.slice(0, 10);
   e.target.value = val;
 });
 
+// Set min date to today
+const bookDate = document.getElementById("bookDate");
+if (bookDate) {
+  const today = new Date().toISOString().split("T")[0];
+  bookDate.setAttribute("min", today);
+}
+
 bookingForm?.addEventListener("submit", (e) => {
   e.preventDefault();
-  
-  // Show beautiful success alert details inside form
-  if (formSuccess) {
-    formSuccess.style.display = "flex";
-    bookingForm.querySelector(".btn-block").style.display = "none";
-    
-    // Auto reset and hide success message after 5 seconds
-    setTimeout(() => {
-      bookingForm.reset();
-      formSuccess.style.display = "none";
-      bookingForm.querySelector(".btn-block").style.display = "inline-flex";
-    }, 5000);
-  }
+
+  const name = document.getElementById("bookName")?.value || "";
+  const phone = document.getElementById("bookPhone")?.value || "";
+  const service = document.getElementById("bookService")?.value || "";
+  const date = document.getElementById("bookDate")?.value || "";
+  const address = document.getElementById("bookAddress")?.value || "";
+
+  // Build WhatsApp message
+  const msg = `Hello SA Service Point! 🙏\n\nI'd like to book a service:\n\n📅 Date: ${date}\n🔧 Service: ${service}\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Address: ${address}\n\nPlease confirm my booking. Thank you!`;
+
+  const waURL = `https://wa.me/917411741418?text=${encodeURIComponent(msg)}`;
+  window.open(waURL, "_blank");
 });

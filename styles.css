@@ -55,15 +55,15 @@ img{max-width:100%;display:block}
 /* ── Hero ── */
 .hero{position:relative;height:100vh;min-height:550px;overflow:hidden;background:var(--navy)}
 .hero-slides{position:relative;width:100%;height:100%}
-.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;visibility:hidden;transition:opacity 1s ease,visibility 1s;display:flex;align-items:center;z-index:1}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;visibility:hidden;transition:opacity 1s ease,visibility 1s;display:flex;align-items:flex-end;z-index:1;padding-bottom:80px}
 .slide.active{opacity:1;visibility:visible;z-index:2}
-.slide-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(5,33,58,.92) 0%,rgba(13,106,176,.65) 55%,rgba(13,106,176,.25) 100%);z-index:2}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,33,58,.3) 0%,rgba(5,33,58,.85) 100%);z-index:2}
 .slide-content{position:relative;z-index:3;max-width:650px;padding:0 clamp(24px,6vw,100px);color:var(--white);opacity:0;transform:translateY(25px);transition:opacity .7s ease .3s,transform .7s ease .3s}
 .slide.active .slide-content{opacity:1;transform:translateY(0)}
-.slide-tag{display:inline-block;background:rgba(251,188,4,.15);color:var(--accent);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:18px;border:1px solid rgba(251,188,4,.3)}
-.slide-content h1{font-size:clamp(30px,4.5vw,52px);font-weight:900;line-height:1.2;margin-bottom:18px}
-.slide-content p{font-size:clamp(15px,1.6vw,18px);opacity:.88;line-height:1.7;margin-bottom:30px;max-width:540px}
-.slide-btns{display:flex;gap:14px;flex-wrap:wrap}
+.slide-tag{display:inline-block;background:rgba(251,188,4,.15);color:var(--accent);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;border:1px solid rgba(251,188,4,.3)}
+.slide-content h1{font-size:clamp(24px,4.5vw,52px);font-weight:900;line-height:1.2;margin-bottom:12px}
+.slide-content p{font-size:clamp(14px,1.6vw,18px);opacity:.88;line-height:1.6;margin-bottom:20px;max-width:540px}
+.slide-btns{display:flex;gap:12px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:30px;font-weight:800;font-size:14px;transition:var(--ease)}
 .btn-primary{background:var(--primary);color:var(--white);box-shadow:0 8px 20px rgba(13,106,176,.3)}
 .btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px)}
@@ -149,16 +149,19 @@ img{max-width:100%;display:block}
 .phone-screen.playing img, .phone-screen.playing .video-overlay{display:none}
 .phone-screen iframe{width:100%;height:100%;border:none;background:#000;z-index:6;position:absolute;top:0;left:0}
 
-/* ── Testimonials ── */
-.testimonial-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
-.testimonial{background:var(--white);border-radius:var(--radius);padding:30px 24px;border:1.5px solid var(--border);box-shadow:var(--shadow);transition:var(--ease)}
-.testimonial:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--primary)}
-.stars{margin-bottom:16px;color:var(--accent);font-size:16px;display:flex;gap:3px}
-.testimonial>p{color:var(--text);font-size:15px;line-height:1.7;margin-bottom:20px;font-style:italic}
-.testimonial-author{display:flex;align-items:center;gap:12px}
-.author-avatar{width:44px;height:44px;border-radius:50%;background:var(--primary);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
-.testimonial-author strong{display:block;font-size:14px;color:var(--slate);font-weight:800}
-.testimonial-author span{font-size:12px;color:var(--muted)}
+/* ── Review Carousel ── */
+.review-carousel{overflow:hidden;position:relative;width:100%;padding:0 0 10px}
+.review-track{display:flex;gap:24px;animation:reviewScroll 20s linear infinite;width:max-content}
+.review-track:hover{animation-play-state:paused}
+@keyframes reviewScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.review-card{flex:0 0 340px;background:var(--white);border-radius:var(--radius);padding:28px 24px;border:1.5px solid var(--border);box-shadow:var(--shadow);position:relative}
+.review-google{position:absolute;top:20px;right:20px;width:32px;height:32px;border-radius:50%;background:#f1f3f4;display:flex;align-items:center;justify-content:center;color:#4285f4;font-size:16px}
+.stars{margin-bottom:14px;color:var(--accent);font-size:15px;display:flex;gap:3px}
+.review-card>p{color:var(--text);font-size:14px;line-height:1.7;margin-bottom:18px;font-style:italic;min-height:60px}
+.review-author{display:flex;align-items:center;gap:12px}
+.author-avatar{width:42px;height:42px;border-radius:50%;background:var(--primary);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0}
+.review-author strong{display:block;font-size:14px;color:var(--slate);font-weight:800}
+.review-author span{font-size:12px;color:var(--muted)}
 
 /* ── FAQ ── */
 .faq-list{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
@@ -214,33 +217,63 @@ img{max-width:100%;display:block}
 .anim-up.visible{opacity:1;transform:translateY(0)}
 
 /* ── Responsive ── */
+/* ── WhatsApp Book Button ── */
+.btn-whatsapp{background:#25d366;color:var(--white);box-shadow:0 8px 20px rgba(37,211,102,.3);font-size:16px;padding:15px 28px}
+.btn-whatsapp:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.4)}
+.btn-whatsapp i{font-size:20px}
+
 @media(max-width:1024px){
   .process-track{grid-template-columns:repeat(2,1fr);gap:20px}
   .process-line{display:none}
   .contact-grid{grid-template-columns:1fr}
 }
 @media(max-width:900px){
-  .header{height:70px}
+  .header{height:64px;padding:0 16px}
+  .brand-logo{height:40px;width:40px}
+  .brand-text strong{font-size:13px}
+  .brand-text small{font-size:10px}
   .hamburger{display:flex}
-  .nav{position:fixed;top:70px;left:0;right:0;background:var(--white);flex-direction:column;padding:24px;gap:16px;border-bottom:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,.05);opacity:0;visibility:hidden;transform:translateY(-8px);transition:var(--ease)}
+  .nav{position:fixed;top:64px;left:0;right:0;background:var(--white);flex-direction:column;padding:20px;gap:14px;border-bottom:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,.05);opacity:0;visibility:hidden;transform:translateY(-8px);transition:var(--ease)}
   .nav.open{opacity:1;visibility:visible;transform:translateY(0)}
   .nav-cta{text-align:center;width:100%}
-  .quick-bar{flex-direction:column;transform:none;margin:0 20px 30px;border-radius:14px}
-  .quick-bar a{border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
+  .hero{height:85vh;min-height:480px}
+  .slide{padding-bottom:70px}
+  .slide-content{padding:0 20px}
+  .slide-content h1{font-size:22px;margin-bottom:10px}
+  .slide-content p{font-size:13px;margin-bottom:16px;line-height:1.5}
+  .slide-tag{font-size:10px;padding:4px 10px;margin-bottom:10px}
+  .slide-btns .btn{padding:10px 18px;font-size:13px}
+  .quick-bar{flex-direction:column;transform:none;margin:0 16px 24px;border-radius:14px}
+  .quick-bar a{border-right:none;border-bottom:1px solid rgba(255,255,255,.1);padding:14px 16px;font-size:13px}
   .quick-bar a:last-child{border-bottom:none}
-  .hero-arrow{width:40px;height:40px;font-size:18px}
-  .hero-arrow.prev{left:12px}
-  .hero-arrow.next{right:12px}
+  .hero-arrow{width:36px;height:36px;font-size:16px}
+  .hero-arrow.prev{left:8px}
+  .hero-arrow.next{right:8px}
+  .hero-dots{bottom:20px}
+  .dot{width:8px;height:8px}
+  .dot.active{width:22px}
 }
 @media(max-width:600px){
-  .section{padding:60px 20px}
-  .services-grid{grid-template-columns:1fr}
-  .process-track{grid-template-columns:1fr}
-  .video-grid{grid-template-columns:1fr}
-  .testimonial-grid{grid-template-columns:1fr}
+  .section{padding:50px 16px}
+  .section-head{margin-bottom:30px}
+  .section-head h2{font-size:22px}
+  .section-head p{font-size:14px}
+  .services-grid{grid-template-columns:1fr;gap:18px}
+  .svc-img{height:180px}
+  .process-track{grid-template-columns:1fr;gap:16px}
+  .video-grid{flex-direction:column;align-items:center;gap:24px}
+  .phone-mockup{width:220px;height:440px;border-width:8px;border-radius:28px}
+  .phone-mockup::before{width:80px;height:14px}
+  .play-circle{width:48px;height:48px;font-size:18px}
+  .video-overlay h4{font-size:13px}
+  .review-card{flex:0 0 280px;padding:22px 18px}
+  .review-card>p{font-size:13px;min-height:48px}
   .footer-top,.footer-bottom{flex-direction:column;text-align:center}
   .footer-nav{justify-content:center;flex-wrap:wrap}
   .footer-legal{justify-content:center}
+  .contact-info h3{font-size:22px}
+  .map-block{min-height:280px;padding:30px 20px}
+  .fab-whatsapp{bottom:16px;right:16px;width:50px;height:50px;font-size:24px}
 }
 
 /* ── Booking Form Section ── */
