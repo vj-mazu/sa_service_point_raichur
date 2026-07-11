@@ -67,13 +67,9 @@ document.querySelectorAll(".anim-up").forEach(el => observer.observe(el));
 
 // ── Video Play ──
 function playVideo(card, url) {
-  if (card.classList.contains("playing")) return;
-  card.classList.add("playing");
-  const iframe = document.createElement("iframe");
-  iframe.src = url;
-  iframe.setAttribute("allowfullscreen", "");
-  iframe.setAttribute("allow", "autoplay; encrypted-media");
-  card.appendChild(iframe);
+  // Convert embed URL to standard reel URL for direct view
+  const targetUrl = url.replace("/embed", "");
+  window.open(targetUrl, "_blank");
 }
 
 // ── Header shrink on scroll ──
