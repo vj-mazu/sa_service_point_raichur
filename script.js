@@ -125,3 +125,30 @@ bookingForm?.addEventListener("submit", (e) => {
   const waURL = `https://wa.me/917411741418?text=${encodeURIComponent(msg)}`;
   window.open(waURL, "_blank");
 });
+
+// ── Mobile Video Reels Indicators ──
+const videoGrid = document.querySelector(".video-grid");
+const videoIndicators = document.getElementById("videoIndicators");
+const mockups = document.querySelectorAll(".phone-mockup");
+
+if (videoGrid && videoIndicators && mockups.length > 0) {
+  // Dynamically build the dots
+  mockups.forEach((_, i) => {
+    const dot = document.createElement("div");
+    dot.classList.add("video-dot");
+    if (i === 0) dot.classList.add("active");
+    videoIndicators.appendChild(dot);
+  });
+
+  const vDots = videoIndicators.querySelectorAll(".video-dot");
+
+  // Update active dot on scroll
+  videoGrid.addEventListener("scroll", () => {
+    const scrollLeft = videoGrid.scrollLeft;
+    const width = videoGrid.clientWidth;
+    const activeIndex = Math.round(scrollLeft / width);
+    vDots.forEach((d, idx) => {
+      d.classList.toggle("active", idx === activeIndex);
+    });
+  }, { passive: true });
+}
