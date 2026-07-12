@@ -31,12 +31,12 @@
       body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--white);line-height:1.65}
       .loader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--navy);transition:opacity .6s ease,visibility .6s ease;pointer-events:auto}
       .loader.hide{opacity:0;visibility:hidden;pointer-events:none}
-      .loader-inner{text-align:center;width:240px;animation:loaderEntrance .7s cubic-bezier(.22,.68,0,1.2) forwards}
-      .loader-logo{width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 20px;background:var(--white);padding:6px;box-shadow:0 0 50px rgba(13,106,176,.5);animation:pulse 1.8s ease-in-out 0.7s infinite}
+      .loader-inner{text-align:center;width:240px;animation:loaderFadeIn .6s ease forwards}
+      .loader-logo{width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 20px;background:var(--white);padding:6px;box-shadow:0 0 50px rgba(13,106,176,.5);animation:pulse 1.8s ease-in-out 0.6s infinite}
       .loader-bar{width:100%;height:4px;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden;margin-bottom:16px}
-      .loader-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#ffd740);border-radius:inherit;animation:fillBar 3s ease .2s forwards}
-      .loader-text{color:var(--white);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;opacity:0;animation:fadeInText .5s ease .5s forwards}
-      @keyframes loaderEntrance{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:translateY(0)}}
+      .loader-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#ffd740);border-radius:inherit;animation:fillBar 3s ease .1s forwards}
+      .loader-text{color:var(--white);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;opacity:0;animation:fadeInText .4s ease .4s forwards}
+      @keyframes loaderFadeIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
       @keyframes fillBar{to{width:100%}}
       @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 40px rgba(13,106,176,.4)}50%{transform:scale(1.07);box-shadow:0 0 60px rgba(13,106,176,.7)}}
       @keyframes fadeInText{to{opacity:.85}}
