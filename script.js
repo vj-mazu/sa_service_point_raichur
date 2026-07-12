@@ -3,9 +3,15 @@
 
 // ── Loader ──
 window.addEventListener("load", () => {
-  setTimeout(() => {
-    document.getElementById("loader")?.classList.add("hide");
-  }, 3000);
+  const loader = document.getElementById("loader");
+  if (loader) {
+    setTimeout(() => {
+      loader.classList.add("hide");
+      loader.addEventListener("transitionend", () => {
+        loader.style.display = "none";
+      }, { once: true });
+    }, 2500);
+  }
 });
 
 // ── Mobile Menu ──
