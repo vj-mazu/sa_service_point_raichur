@@ -14,8 +14,8 @@
     <link rel="preload" href="logo.webp" as="image" fetchpriority="high">
     <link rel="preload" href="overhead-tank.webp" as="image" fetchpriority="high">
     <link rel="preload" href="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=35" as="image" fetchpriority="high">
-    <link rel="preload" href="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=450&q=50" as="image" fetchpriority="high">
-    <link rel="preload" href="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=426&q=50" as="image" fetchpriority="high">
+    <link rel="preload" href="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=450&q=35" as="image" fetchpriority="high">
+    <link rel="preload" href="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=426&q=35" as="image" fetchpriority="high">
 
     <!-- Fonts (Asynchronously Loaded, Font Awesome replaced with inline SVGs) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,12 +27,12 @@
 
     <!-- Critical CSS (Inlined to prevent Render-Blocking) -->
     <style>
-      :root{--primary:#0d6ab0;--primary-dark:#084d82;--accent:#fbbc04;--navy:#05213a;--slate:#071b2d;--text:#101828;--muted:#667085;--light:#f4fbff;--white:#fff;--border:rgba(13,106,176,.08);--shadow:0 8px 30px rgba(13,106,176,.06);--radius:20px;--ease:color .25s ease,background-color .25s ease,opacity .25s ease,transform .25s ease}
+      :root{--primary:#0d6ab0;--primary-dark:#084d82;--accent:#fbbc04;--navy:#05213a;--slate:#071b2d;--text:#101828;--muted:#667085;--light:#f4fbff;--white:#fff;--border:rgba(13,106,176,.08);--shadow:0 8px 30px rgba(13,106,176,.06);--radius:20px;--ease:background-color .25s ease,opacity .25s ease,transform .25s ease}
       *{box-sizing:border-box;margin:0;padding:0}
       html{scroll-behavior:smooth;overflow-x:hidden}
       body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--white);line-height:1.65}
-      .loader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--navy);transition:opacity .4s ease,visibility .4s ease;pointer-events:auto}
-      .loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+      .loader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--navy);transition:opacity .4s ease;pointer-events:auto}
+      .loader.hide{opacity:0;pointer-events:none}
       .loader-inner{text-align:center;width:240px}
       .loader-logo{width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 20px;background:var(--white);padding:6px;box-shadow:0 0 50px rgba(13,106,176,.5);animation:pulse 1.8s ease-in-out infinite}
       .loader-bar{width:100%;height:4px;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden;margin-bottom:16px}
@@ -44,6 +44,11 @@
       .hero{position:relative;height:100vh;min-height:550px;overflow:hidden;background:var(--navy);contain:layout size style}
       .hero-slides{position:relative;width:100%;height:100%;contain:layout size style}
       .slide{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;display:flex;align-items:center;contain:layout size style}
+      .quick-bar{display:flex;background:var(--primary);margin:0 clamp(20px,5vw,80px);border-radius:16px;overflow:hidden;box-shadow:0 14px 35px rgba(13,106,176,.15);transform:translateY(-50%);position:relative;z-index:10}
+      @media(max-width:900px){
+        .hero{height:80vh;min-height:450px}
+        .quick-bar{display:grid;grid-template-columns:1fr 1fr;transform:none;margin:0 16px 20px;border-radius:14px;gap:1px;background:rgba(255,255,255,.15)}
+      }
     </style>
 
     <link rel="preload" href="styles.css" as="style">
@@ -218,8 +223,8 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=450&q=50" 
-                     srcset="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=450&q=50 450w, https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=50 800w" 
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=450&q=35" 
+                     srcset="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=450&q=35 450w, https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=35 800w" 
                      sizes="(max-width: 600px) 100vw, 450px" 
                      alt="Home Deep Cleaning" fetchpriority="high" width="450" height="300">
                 <div class="svc-num">01</div>
@@ -291,8 +296,7 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=426&q=50"
-                     srcset="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=426&q=50 426w, https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=700&q=50 700w"
+                <img src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=426&q=35"
                      sizes="(max-width: 600px) 100vw, 426px"
                      alt="Packers & Movers" fetchpriority="high" width="426" height="280">
                 <div class="svc-num">06</div>
