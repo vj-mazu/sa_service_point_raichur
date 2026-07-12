@@ -11,11 +11,19 @@
     <meta property="og:description" content="One call, every solution. Professional cleaning, care, comfort, and shifting services in Raichur." />
     <meta property="og:type" content="website" />
 
-    <!-- Fonts & Icons -->
+    <!-- Preload critical resources -->
+    <link rel="preload" href="overhead-tank.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="logo.webp" as="image">
+
+    <!-- Fonts & Icons (Asynchronously Loaded) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </noscript>
 
     <link rel="stylesheet" href="styles.css" />
 
@@ -36,7 +44,7 @@
     <!-- Loader -->
     <div class="loader" id="loader">
       <div class="loader-inner">
-        <img src="logo.png" alt="SA Service Point" class="loader-logo">
+        <img src="logo.webp" alt="SA Service Point" class="loader-logo" width="100" height="100">
         <div class="loader-bar"><div class="loader-fill"></div></div>
         <p class="loader-text">SA SERVICE POINT</p>
       </div>
@@ -53,7 +61,7 @@
     <!-- Header -->
     <header class="header" id="top">
       <a class="brand" href="#top">
-        <img src="logo.png" alt="SA Service Point" class="brand-logo">
+        <img src="logo.webp" alt="SA Service Point Logo" class="brand-logo" width="50" height="50">
         <div class="brand-text">
           <strong>SA SERVICE POINT</strong>
           <small>Raichur</small>
@@ -80,7 +88,7 @@
       <!-- Hero Carousel -->
       <section class="hero" id="home">
         <div class="hero-slides">
-          <div class="slide active" style="background-image:url('overhead-tank.jpg')">
+          <div class="slide active" style="background-image:url('overhead-tank.webp')" fetchpriority="high">
             <div class="slide-overlay"></div>
             <div class="slide-content">
               <span class="slide-tag">Professional Tank Care</span>
@@ -156,12 +164,12 @@
         <button class="hero-arrow prev" id="heroPrev" aria-label="Previous">&#8249;</button>
         <button class="hero-arrow next" id="heroNext" aria-label="Next">&#8250;</button>
         <div class="hero-dots" id="heroDots">
-          <button class="dot active" data-i="0"></button>
-          <button class="dot" data-i="1"></button>
-          <button class="dot" data-i="2"></button>
-          <button class="dot" data-i="3"></button>
-          <button class="dot" data-i="4"></button>
-          <button class="dot" data-i="5"></button>
+          <button class="dot active" data-i="0" aria-label="Go to slide 1"></button>
+          <button class="dot" data-i="1" aria-label="Go to slide 2"></button>
+          <button class="dot" data-i="2" aria-label="Go to slide 3"></button>
+          <button class="dot" data-i="3" aria-label="Go to slide 4"></button>
+          <button class="dot" data-i="4" aria-label="Go to slide 5"></button>
+          <button class="dot" data-i="5" aria-label="Go to slide 6"></button>
         </div>
       </section>
 
@@ -184,7 +192,10 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80" alt="Home Deep Cleaning" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80" 
+                     srcset="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80 1200w" 
+                     sizes="(max-width: 600px) 100vw, 600px" 
+                     alt="Home Deep Cleaning" loading="lazy" width="600" height="400">
                 <div class="svc-num">01</div>
                 <div class="svc-icon"><i class="fa-solid fa-broom"></i></div>
               </div>
@@ -198,7 +209,7 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="overhead-tank.jpg" alt="Water Tank Cleaning" loading="lazy">
+                <img src="overhead-tank.webp" alt="Water Tank Cleaning" loading="lazy" width="600" height="400">
                 <div class="svc-num">02</div>
                 <div class="svc-icon"><i class="fa-solid fa-droplet"></i></div>
               </div>
@@ -212,7 +223,10 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=600&q=80" alt="Sofa & Carpet Cleaning" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=600&q=80" 
+                     srcset="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1200&q=80 1200w" 
+                     sizes="(max-width: 600px) 100vw, 600px" 
+                     alt="Sofa & Carpet Cleaning" loading="lazy" width="600" height="400">
                 <div class="svc-num">03</div>
                 <div class="svc-icon"><i class="fa-solid fa-couch"></i></div>
               </div>
@@ -226,7 +240,10 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Washroom Cleaning" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" 
+                     srcset="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80 1200w" 
+                     sizes="(max-width: 600px) 100vw, 600px" 
+                     alt="Washroom Cleaning" loading="lazy" width="600" height="400">
                 <div class="svc-num">04</div>
                 <div class="svc-icon"><i class="fa-solid fa-soap"></i></div>
               </div>
@@ -240,7 +257,10 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=600&q=80" alt="Car Wash" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=600&q=80" 
+                     srcset="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1200&q=80 1200w" 
+                     sizes="(max-width: 600px) 100vw, 600px" 
+                     alt="Car Wash" loading="lazy" width="600" height="400">
                 <div class="svc-num">05</div>
                 <div class="svc-icon"><i class="fa-solid fa-car-side"></i></div>
               </div>
@@ -254,7 +274,10 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=600&q=80" alt="Packers & Movers" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=600&q=80" 
+                     srcset="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=1200&q=80 1200w" 
+                     sizes="(max-width: 600px) 100vw, 600px" 
+                     alt="Packers & Movers" loading="lazy" width="600" height="400">
                 <div class="svc-num">06</div>
                 <div class="svc-icon"><i class="fa-solid fa-truck-moving"></i></div>
               </div>
@@ -278,32 +301,32 @@
         <div class="why-grid">
           <div class="why-card anim-up">
             <div class="why-icon-wrap"><i class="fa-solid fa-user-shield"></i></div>
-            <h4>Verified & Trained Team</h4>
+            <h3>Verified & Trained Team</h3>
             <p>Background-checked professionals trained in safe chemical handling and advanced cleaning procedures.</p>
           </div>
           <div class="why-card anim-up">
             <div class="why-icon-wrap"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-            <h4>Premium Equipment</h4>
+            <h3>Premium Equipment</h3>
             <p>Industrial vacuum extractors, high-pressure jet washers, and hospital-grade eco-friendly sanitisers.</p>
           </div>
           <div class="why-card anim-up">
             <div class="why-icon-wrap"><i class="fa-solid fa-leaf"></i></div>
-            <h4>100% Safe & Non-Toxic</h4>
+            <h3>100% Safe & Non-Toxic</h3>
             <p>Child-safe, pet-safe cleaning chemicals. Zero harmful residue — safe for your family's health.</p>
           </div>
           <div class="why-card anim-up">
             <div class="why-icon-wrap"><i class="fa-solid fa-clock"></i></div>
-            <h4>Same-Day Availability</h4>
+            <h3>Same-Day Availability</h3>
             <p>Flexible scheduling with emergency slots. Book morning, evening, or weekend — we adapt to you.</p>
           </div>
           <div class="why-card anim-up">
             <div class="why-icon-wrap"><i class="fa-solid fa-indian-rupee-sign"></i></div>
-            <h4>Transparent Pricing</h4>
+            <h3>Transparent Pricing</h3>
             <p>No hidden charges. Upfront quotes before we start. Pay only for what you see delivered.</p>
           </div>
           <div class="why-card anim-up">
             <div class="why-icon-wrap"><i class="fa-solid fa-star"></i></div>
-            <h4>Satisfaction Guaranteed</h4>
+            <h3>Satisfaction Guaranteed</h3>
             <p>Not happy? We re-do the job at zero extra cost. Your satisfaction is our reputation.</p>
           </div>
         </div>
@@ -319,22 +342,22 @@
           <div class="process-line"></div>
           <div class="step anim-up">
             <div class="step-circle">01</div>
-            <h4>Call or WhatsApp</h4>
+            <h3>Call or WhatsApp</h3>
             <p>Reach us on a single tap — tell us what you need.</p>
           </div>
           <div class="step anim-up">
             <div class="step-circle">02</div>
-            <h4>Share Requirements</h4>
+            <h3>Share Requirements</h3>
             <p>Describe the service, location, and preferred timing.</p>
           </div>
           <div class="step anim-up">
             <div class="step-circle">03</div>
-            <h4>Get Confirmation</h4>
+            <h3>Get Confirmation</h3>
             <p>We confirm your slot, team, and transparent pricing.</p>
           </div>
           <div class="step anim-up">
             <div class="step-circle">04</div>
-            <h4>Service & Audit</h4>
+            <h3>Service & Audit</h3>
             <p>Our team delivers the work with a quality audit check.</p>
           </div>
         </div>
@@ -351,30 +374,30 @@
           <!-- Smartphone Mockup 1 -->
           <div class="phone-mockup anim-up">
             <div class="phone-screen" onclick="playVideo(this,'https://www.instagram.com/reel/DanskqgzKYC/embed')">
-              <img src="overhead-tank.jpg" alt="Water Tank Cleaning Video" loading="lazy">
+              <img src="overhead-tank.webp" alt="Water Tank Cleaning Video" loading="lazy" width="240" height="480">
               <div class="video-overlay">
                 <div class="play-circle"><i class="fa-solid fa-play"></i></div>
-                <h4>Water Tank Cleaning</h4>
+                <h3>Water Tank Cleaning</h3>
               </div>
             </div>
           </div>
           <!-- Smartphone Mockup 2 -->
           <div class="phone-mockup anim-up">
             <div class="phone-screen" onclick="playVideo(this,'https://www.instagram.com/reel/DW_-w0Nkxdz/embed')">
-              <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=500&q=80" alt="Home Deep Cleaning Video" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=500&q=80" alt="Home Deep Cleaning Video" loading="lazy" width="240" height="480">
               <div class="video-overlay">
                 <div class="play-circle"><i class="fa-solid fa-play"></i></div>
-                <h4>Home Deep Cleaning</h4>
+                <h3>Home Deep Cleaning</h3>
               </div>
             </div>
           </div>
           <!-- Smartphone Mockup 3 -->
           <div class="phone-mockup anim-up">
             <div class="phone-screen" onclick="playVideo(this,'https://www.instagram.com/reel/DaayksMToax/embed')">
-              <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=500&q=80" alt="Sofa Cleaning Video" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=500&q=80" alt="Sofa Cleaning Video" loading="lazy" width="240" height="480">
               <div class="video-overlay">
                 <div class="play-circle"><i class="fa-solid fa-play"></i></div>
-                <h4>Sofa & Carpet Cleaning</h4>
+                <h3>Sofa & Carpet Cleaning</h3>
               </div>
             </div>
           </div>
