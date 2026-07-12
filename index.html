@@ -25,7 +25,28 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </noscript>
 
-    <link rel="stylesheet" href="styles.css" />
+    <!-- Critical CSS (Inlined to prevent Render-Blocking) -->
+    <style>
+      :root{--primary:#0d6ab0;--primary-dark:#084d82;--accent:#fbbc04;--navy:#05213a;--slate:#071b2d;--text:#101828;--muted:#667085;--light:#f4fbff;--white:#fff;--border:rgba(13,106,176,.08);--shadow:0 8px 30px rgba(13,106,176,.06);--radius:20px;--ease:all .35s cubic-bezier(.4,0,.2,1)}
+      *{box-sizing:border-box;margin:0;padding:0}
+      html{scroll-behavior:smooth;overflow-x:hidden}
+      body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--white);line-height:1.65}
+      .loader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--navy);transition:opacity .5s,visibility .5s;pointer-events:auto}
+      .loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+      .loader-inner{text-align:center;width:240px}
+      .loader-logo{width:100px;height:100px;border-radius:50%;object-fit:cover;margin:0 auto 20px;background:var(--white);padding:6px;box-shadow:0 0 40px rgba(13,106,176,.4);animation:pulse 1.6s ease-in-out infinite}
+      .loader-bar{width:100%;height:3px;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden;margin-bottom:16px}
+      .loader-fill{height:100%;width:0;background:var(--accent);border-radius:inherit;animation:fillBar 3s ease forwards}
+      .loader-text{color:var(--white);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;opacity:.8}
+      @keyframes fillBar{to{width:100%}}
+      @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+      .header{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;height:80px;padding:0 clamp(20px,5vw,80px);background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+      .hero{position:relative;height:100vh;min-height:550px;overflow:hidden;background:var(--navy)}
+    </style>
+
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
 
     <script type="application/ld+json">
       {
@@ -223,10 +244,7 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=600&q=80" 
-                     srcset="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1200&q=80 1200w" 
-                     sizes="(max-width: 600px) 100vw, 600px" 
-                     alt="Sofa & Carpet Cleaning" loading="lazy" width="600" height="400">
+                <img src="sofa-cleaning.webp" alt="Sofa & Carpet Cleaning" loading="lazy" width="391" height="260">
                 <div class="svc-num">03</div>
                 <div class="svc-icon"><i class="fa-solid fa-couch"></i></div>
               </div>
@@ -240,10 +258,7 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" 
-                     srcset="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80 1200w" 
-                     sizes="(max-width: 600px) 100vw, 600px" 
-                     alt="Washroom Cleaning" loading="lazy" width="600" height="400">
+                <img src="washroom-cleaning.webp" alt="Washroom Cleaning" loading="lazy" width="375" height="250">
                 <div class="svc-num">04</div>
                 <div class="svc-icon"><i class="fa-solid fa-soap"></i></div>
               </div>
@@ -257,10 +272,7 @@
           <article class="svc-card anim-up">
             <div class="svc-card-inner">
               <div class="svc-img">
-                <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=600&q=80" 
-                     srcset="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1200&q=80 1200w" 
-                     sizes="(max-width: 600px) 100vw, 600px" 
-                     alt="Car Wash" loading="lazy" width="600" height="400">
+                <img src="car-wash.webp" alt="Car Wash" loading="lazy" width="391" height="220">
                 <div class="svc-num">05</div>
                 <div class="svc-icon"><i class="fa-solid fa-car-side"></i></div>
               </div>
@@ -590,7 +602,7 @@
     <footer class="footer">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="logo.png" alt="SA Service Point" class="footer-logo">
+          <img src="logo.webp" alt="SA Service Point" class="footer-logo" width="44" height="44">
           <div><strong>SA Service Point</strong><span>Professional Cleaning & Shifting Services, Raichur</span></div>
         </div>
         <div class="footer-nav">
