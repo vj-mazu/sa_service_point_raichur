@@ -34,12 +34,11 @@
       .loader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--navy);transition:opacity .4s ease;pointer-events:auto;contain:layout size style}
       .loader.hide{opacity:0;pointer-events:none}
       .loader-inner{text-align:center;width:240px;height:190px;contain:layout style}
-      .loader-logo{width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 20px;background:var(--white);padding:6px;box-shadow:0 0 50px rgba(13,106,176,.5);animation:pulse 1.8s ease-in-out infinite}
+      .loader-logo{width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 20px;background:var(--white);padding:6px;box-shadow:0 0 50px rgba(13,106,176,.5)}
       .loader-bar{width:100%;height:4px;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden;margin-bottom:16px}
       .loader-fill{height:100%;width:100%;background:linear-gradient(90deg,var(--accent),#ffd740);border-radius:inherit;transform-origin:center;transform:scaleX(0);animation:fillBar 2.5s cubic-bezier(.1,.9,.21,1) .1s forwards}
       .loader-text{color:var(--white);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;opacity:0.85;margin-bottom:16px}
       @keyframes fillBar{to{transform:scaleX(1)}}
-      @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
       .header{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;height:80px;padding:0 clamp(20px,5vw,80px);background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
       .hero{position:relative;height:100vh;min-height:550px;overflow:hidden;background:var(--navy);contain:layout size style}
       .hero-slides{position:relative;width:100%;height:100%;contain:layout size style}
