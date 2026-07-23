@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA Service Point - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --primary: #000000;
+        --accent: #7c3aed;
+        --bg: #f9fafb;
+        --card: #ffffff;
+        --border: #e5e7eb;
+        --text: #111827;
+        --muted: #6b7280;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+        padding: 40px 20px;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 32px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 20px;
+      }
+      .brand-title {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+      .header-actions {
+        display: flex;
+        gap: 12px;
+      }
+      .btn-back, .btn-action {
+        padding: 10px 20px;
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--text);
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .btn-back:hover, .btn-action:hover {
+        background: #f9fafb;
+        border-color: #d1d5db;
+      }
+      .btn-primary-action {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+      }
+      .btn-primary-action:hover {
+        background: #6d28d9;
+        border-color: #6d28d9;
+      }
+      /* Auth Screen */
+      .auth-card {
+        max-width: 400px;
+        margin: 100px auto 0;
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 32px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        text-align: center;
+      }
+      .auth-card h2 {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 12px;
+      }
+      .auth-card p {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+      .pin-container {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .pin-input {
+        width: 48px;
+        height: 48px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 800;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        outline: none;
+      }
+      .pin-input:focus {
+        border-color: var(--accent);
+      }
+      .btn-submit {
+        width: 100%;
+        padding: 12px;
+        background: var(--primary);
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      /* Dashboard Metrics */
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 32px;
+      }
+      .metric-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 24px;
+        border-radius: 12px;
+      }
+      .metric-card h3 {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .metric-card p {
+        font-size: 28px;
+        font-weight: 800;
+      }
+      /* Filters & Date Selection */
+      .filters-row {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 16px 20px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .filters-left {
+        display: flex;
+        gap: 10px;
+      }
+      .filter-btn {
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: #ffffff;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        color: var(--muted);
+        transition: all 0.2s;
+      }
+      .filter-btn.active {
+        background: var(--primary);
+        color: #ffffff;
+        border-color: var(--primary);
+      }
+      .filter-date-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .date-input {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        outline: none;
+        font-family: inherit;
+        font-size: 13px;
+      }
+      /* Booking Table */
+      .table-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+      }
+      th, td {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border);
+        font-size: 13px;
+      }
+      th {
+        background: #f9fafb;
+        font-weight: 700;
+        color: var(--muted);
+      }
+      .status-select {
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 600;
+        outline: none;
+        background: #f9fafb;
+      }
+      /* Print Styling for PDF download */
+      @media print {
+        body {
+          background: #ffffff;
+          padding: 0;
+          color: #000000;
+        }
+        #authScreen, .header-actions, .filters-row, .status-select {
+          display: none !important;
+        }
+        #adminPanel {
+          display: block !important;
+        }
+        .metric-card {
+          border: 1px solid #000000;
+        }
+        table {
+          border: 1px solid #000000;
+        }
+        th, td {
+          border-bottom: 1px solid #000000;
+        }
+      }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Auth Screen -->
+    <div id="authScreen" class="auth-card">
+        <h2>Enter Admin Passcode</h2>
+        <p>Please enter the 4-digit passcode to access the SA Service Point bookings dashboard.</p>
+        <div class="pin-container">
+            <input type="password" class="pin-input" maxlength="1" autofocus>
+            <input type="password" class="pin-input" maxlength="1">
+            <input type="password" class="pin-input" maxlength="1">
+            <input type="password" class="pin-input" maxlength="1">
+        </div>
+        <button class="btn-submit" onclick="verifyAuth()">Unlock Dashboard</button>
+    </div>
+
+    <!-- Admin Panel Screen (Hidden by default) -->
+    <div id="adminPanel" style="display:none">
+        <div class="header-row">
+            <div class="brand-title">SA Service Point Admin Panel</div>
+            <div class="header-actions">
+                <button class="btn-action btn-primary-action" onclick="window.print()">Download PDF Report</button>
+                <a href="index.html" class="btn-back">← Go Back</a>
+            </div>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Total Bookings</h3>
+                <p id="statTotal">0</p>
+            </div>
+            <div class="metric-card">
+                <h3>Pending Jobs</h3>
+                <p id="statPending" style="color:var(--accent)">0</p>
+            </div>
+            <div class="metric-card">
+                <h3>Completed Jobs</h3>
+                <p id="statCompleted" style="color:#059669">0</p>
+            </div>
+        </div>
+
+        <!-- Filter Row -->
+        <div class="filters-row">
+            <div class="filters-left">
+                <button class="filter-btn active" data-filter="all" onclick="filterByStatus('all', this)">All</button>
+                <button class="filter-btn" data-filter="Pending" onclick="filterByStatus('Pending', this)">Pending</button>
+                <button class="filter-btn" data-filter="Completed" onclick="filterByStatus('Completed', this)">Completed</button>
+            </div>
+            <div class="filter-date-box">
+                <label for="filterDate" style="font-size:13px;font-weight:600">Date Filter:</label>
+                <input type="date" id="filterDate" class="date-input" onchange="loadAdminBookings()">
+            </div>
+        </div>
+
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date & Slot</th>
+                        <th>Customer</th>
+                        <th>Service</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="bookingsTableBody">
+                    <tr>
+                        <td colspan="5" style="text-align:center;color:var(--muted)">No bookings found.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Handle Passcode Input Advance
+    const inputs = document.querySelectorAll(".pin-input");
+    inputs.forEach((input, index) => {
+        input.addEventListener("input", (e) => {
+            if (e.target.value.length === 1 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        });
+        input.addEventListener("keydown", (e) => {
+            if (e.key === "Backspace" && e.target.value.length === 0 && index > 0) {
+                inputs[index - 1].focus();
+            }
+        });
+    });
+
+    let currentFilter = "all";
+
+    function verifyAuth() {
+        let pin = "";
+        inputs.forEach(input => pin += input.value);
+        if (pin === "1234") {
+            document.getElementById("authScreen").style.display = "none";
+            document.getElementById("adminPanel").style.display = "block";
+            loadAdminBookings();
+        } else {
+            alert("Incorrect passcode! Hint: 1234");
+            inputs.forEach(input => input.value = "");
+            inputs[0].focus();
+        }
+    }
+
+    function filterByStatus(status, btn) {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentFilter = status;
+        loadAdminBookings();
+    }
+
+    function loadAdminBookings() {
+        let bookings = JSON.parse(localStorage.getItem("sa_bookings") || "[]");
+        
+        // Date Filter
+        const dateVal = document.getElementById("filterDate").value;
+        if (dateVal) {
+            bookings = bookings.filter(b => b.date === dateVal);
+        }
+
+        // Status Filter
+        if (currentFilter !== "all") {
+            bookings = bookings.filter(b => b.status === currentFilter);
+        }
+
+        document.getElementById("statTotal").textContent = bookings.length;
+        const pending = bookings.filter(b => b.status === "Pending").length;
+        const completed = bookings.filter(b => b.status === "Completed").length;
+        document.getElementById("statPending").textContent = pending;
+        document.getElementById("statCompleted").textContent = completed;
+
+        const tbody = document.getElementById("bookingsTableBody");
+        if (bookings.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--muted)">No bookings match filters.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = bookings.map((b, idx) => `
+            <tr>
+                <td><strong>${b.date}</strong><br><small style="color:var(--muted)">${b.slot}</small></td>
+                <td><strong>${b.name}</strong><br><small style="color:var(--muted)">${b.phone}</small></td>
+                <td><span style="font-weight:600">${b.service}</span></td>
+                <td>${b.address}</td>
+                <td>
+                    <select class="status-select" onchange="updateStatus('${b.id || idx}', this.value)">
+                        <option value="Pending" ${b.status === "Pending" ? "selected" : ""}>Pending</option>
+                        <option value="Completed" ${b.status === "Completed" ? "selected" : ""}>Completed</option>
+                        <option value="Cancelled" ${b.status === "Cancelled" ? "selected" : ""}>Cancelled</option>
+                    </select>
+                </td>
+            </tr>
+        `).join("");
+    }
+
+    window.updateStatus = function(idOrIdx, status) {
+        const bookings = JSON.parse(localStorage.getItem("sa_bookings") || "[]");
+        
+        // Find by unique ID first, fall back to index
+        let targetIdx = bookings.findIndex(b => b.id === idOrIdx);
+        if (targetIdx === -1 && bookings[idOrIdx]) {
+            targetIdx = idOrIdx;
+        }
+
+        if (targetIdx > -1 && bookings[targetIdx]) {
+            bookings[targetIdx].status = status;
+            localStorage.setItem("sa_bookings", JSON.stringify(bookings));
+            loadAdminBookings();
+        }
+    };
+</script>
+</body>
+</html>
