@@ -1,8 +1,8 @@
 :root{
   --primary:#000000;
   --primary-dark:#111111;
-  --accent:#7c3aed;
-  --accent-light:#f3e8ff;
+  --accent:#2563eb;
+  --accent-light:#eff6ff;
   --navy:#0f0f10;
   --slate:#1e293b;
   --text:#111827;
@@ -126,9 +126,18 @@ img{max-width:100%;display:block}
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto}
 .why-card{padding:30px 24px;border-radius:var(--radius);background:#ffffff;border:1px solid var(--border);transition:var(--ease);text-align:left;display:flex;flex-direction:column;align-items:flex-start}
 .why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--border)}
-.why-icon-wrap{width:52px;height:52px;border-radius:12px;background:#f3f4f6;color:#111827;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px;transition:var(--ease);border:1px solid var(--border)}
-.why-icon-wrap svg{fill:currentColor;width:22px;height:22px}
-.why-card:hover .why-icon-wrap{background:var(--accent-light);color:var(--accent);border-color:var(--accent-light)}
+.why-icon-wrap{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px;transition:var(--ease);box-shadow:0 8px 20px rgba(0,0,0,0.12)}
+.why-icon-wrap svg{fill:#ffffff;width:26px;height:26px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15))}
+
+/* Vibrant Colorful Card Badges */
+.why-card:nth-child(1) .why-icon-wrap{background:linear-gradient(135deg, #7c3aed, #a855f7);box-shadow:0 8px 20px rgba(124,58,237,0.3)}
+.why-card:nth-child(2) .why-icon-wrap{background:linear-gradient(135deg, #2563eb, #06b6d4);box-shadow:0 8px 20px rgba(37,99,235,0.3)}
+.why-card:nth-child(3) .why-icon-wrap{background:linear-gradient(135deg, #059669, #10b981);box-shadow:0 8px 20px rgba(5,150,105,0.3)}
+.why-card:nth-child(4) .why-icon-wrap{background:linear-gradient(135deg, #d97706, #f59e0b);box-shadow:0 8px 20px rgba(217,119,6,0.3)}
+.why-card:nth-child(5) .why-icon-wrap{background:linear-gradient(135deg, #4f46e5, #6366f1);box-shadow:0 8px 20px rgba(79,70,229,0.3)}
+.why-card:nth-child(6) .why-icon-wrap{background:linear-gradient(135deg, #e11d48, #f43f5e);box-shadow:0 8px 20px rgba(225,29,72,0.3)}
+
+.why-card:hover .why-icon-wrap{transform:scale(1.08)}
 .why-card h4{font-size:16px;font-weight:800;margin-bottom:8px;color:#111827}
 .why-card p{font-size:13px;color:var(--muted);line-height:1.6}
 
@@ -865,33 +874,28 @@ img{max-width:100%;display:block}
   }
 }
 
-/* ── Sticky Action Bar (Mobile & Desktop) ── */
+/* ── Sticky Action Bar (Mobile & Desktop Vertical Stack) ── */
 .sticky-action-bar {
   position: fixed;
-  bottom: 16px;
+  bottom: 20px;
   right: 20px;
   z-index: 2000;
   display: flex;
-  align-items: center;
+  flex-direction: column-reverse;
+  align-items: flex-end;
   gap: 10px;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 8px 12px;
-  border-radius: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 .sticky-btn {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
-  border-radius: 24px;
+  padding: 9px 16px;
+  border-radius: 30px;
   font-size: 11px;
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 0.2px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .sticky-btn-book {
@@ -912,25 +916,13 @@ img{max-width:100%;display:block}
 }
 @media(max-width: 600px) {
   .sticky-action-bar {
-    left: auto;
     right: 14px;
     bottom: 16px;
-    flex-direction: column-reverse;
-    align-items: flex-end;
     gap: 8px;
-    background: transparent;
-    border: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    box-shadow: none;
-    padding: 0;
   }
   .sticky-btn {
-    flex: initial;
-    padding: 7px 12px;
+    padding: 8px 13px;
     font-size: 10.5px;
-    border-radius: 20px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
   }
 }
 
