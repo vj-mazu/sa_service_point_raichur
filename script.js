@@ -183,6 +183,17 @@ const waRedirectBtn = document.getElementById("waRedirectBtn");
 let currentOTP = "";
 let pendingBooking = null;
 
+function showValidationToast(msg) {
+  const existing = document.getElementById("validationToast");
+  if (existing) existing.remove();
+  const toast = document.createElement("div");
+  toast.id = "validationToast";
+  toast.style.cssText = "position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#ef4444;color:#ffffff;padding:14px 20px;border-radius:8px;z-index:3000;font-size:13px;font-weight:700;box-shadow:0 4px 12px rgba(239,68,68,0.3);text-align:center";
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 4000);
+}
+
 // Restrict phone to 10 digits only
 bookPhone?.addEventListener("input", (e) => {
   let val = e.target.value.replace(/\D/g, "");
@@ -229,6 +240,21 @@ bookingForm?.addEventListener("submit", async (e) => {
   const date = document.getElementById("bookDate")?.value || "";
   const address = document.getElementById("bookAddress")?.value || "";
   const time = document.querySelector('input[name="bookTime"]:checked')?.value || "09:00 AM";
+
+  // Validate Past Date
+  const todayStr = new Date().toISOString().split("T")[0];
+  if (!date || date < todayStr) {
+    showValidationToast("⚠️ Past dates are not allowed. Please select today's date or a future date!");
+    document.getElementById("bookDate")?.focus();
+    return;
+  }
+
+  // Validate Phone Number
+  if (!phone || phone.length !== 10 || !/^[6-9]\d{9}$/.test(phone)) {
+    showValidationToast("⚠️ Please enter a valid 10-digit mobile number.");
+    document.getElementById("bookPhone")?.focus();
+    return;
+  }
 
   // Build the payload
   pendingBooking = {
@@ -325,7 +351,7 @@ otpVerifyBtn?.addEventListener("click", () => {
     otpStepSuccess.style.display = "block";
 
     // Setup WhatsApp Redirect link (to Admin)
-    const adminMsg = `Hello SA Service Point! 🙏\n\nNew Booking Request:\n\n🔧 Service: ${pendingBooking.service}\n📅 Date: ${pendingBooking.date}\n⏰ Time: ${pendingBooking.time || pendingBooking.slot}\n👤 Customer: ${pendingBooking.name}\n📞 Phone: ${pendingBooking.phone}\n📍 Address: ${pendingBooking.address}\n\nPlease confirm!`;
+    const adminMsg = `Hello SA Service Point! 🙏\n\nNew Booking Confirmed (OTP Verified):\n\n🔧 Service: ${pendingBooking.service}\n📅 Date: ${pendingBooking.date}\n⏰ Time: ${pendingBooking.time || pendingBooking.slot}\n👤 Customer: ${pendingBooking.name}\n📞 Phone: ${pendingBooking.phone}\n📍 Address: ${pendingBooking.address}\n\nStatus: Registered in Database ✅`;
     const waURL = `https://wa.me/917411741418?text=${encodeURIComponent(adminMsg)}`;
     waRedirectBtn.href = waURL;
 
@@ -335,6 +361,11 @@ otpVerifyBtn?.addEventListener("click", () => {
     if (smsRedirectBtn) {
       smsRedirectBtn.href = `sms:${pendingBooking.phone}?body=${encodeURIComponent(customerMsg)}`;
     }
+
+    // Auto-open WhatsApp message to Admin after 1.5 seconds
+    setTimeout(() => {
+      window.open(waURL, '_blank');
+    }, 1500);
 
     // Reset Booking form
     bookingForm.reset();
