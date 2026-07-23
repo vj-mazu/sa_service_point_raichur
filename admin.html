@@ -363,9 +363,28 @@
         loadAdminBookings();
     }
 
-    function loadAdminBookings() {
-        let bookings = JSON.parse(localStorage.getItem("sa_bookings") || "[]");
+    async function loadAdminBookings() {
+        let serverBookings = [];
+        try {
+            const res = await fetch("/api/bookings");
+            const data = await res.json();
+            if (data.success && Array.isArray(data.bookings)) {
+                serverBookings = data.bookings;
+            }
+        } catch (e) {
+            console.log("Server fetch error, falling back to local dataset", e);
+        }
+
+        const localBookings = JSON.parse(localStorage.getItem("sa_bookings") || "[]");
         
+        // Merge server and local bookings uniquely by ID
+        const map = new Map();
+        [...serverBookings, ...localBookings].forEach(item => {
+            if (item && item.id) map.set(item.id, item);
+        });
+        
+        let bookings = Array.from(map.values());
+
         // Date Filter
         const dateVal = document.getElementById("filterDate").value;
         if (dateVal) {
@@ -391,7 +410,7 @@
 
         tbody.innerHTML = bookings.map((b, idx) => `
             <tr>
-                <td><strong>${b.date}</strong><br><small style="color:var(--muted)">${b.slot}</small></td>
+                <td><strong>${b.date}</strong><br><small style="color:var(--muted)">${b.slot || b.time || ''}</small></td>
                 <td><strong>${b.name}</strong><br><small style="color:var(--muted)">${b.phone}</small></td>
                 <td><span style="font-weight:600">${b.service}</span></td>
                 <td>${b.address}</td>
@@ -406,20 +425,25 @@
         `).join("");
     }
 
-    window.updateStatus = function(idOrIdx, status) {
-        const bookings = JSON.parse(localStorage.getItem("sa_bookings") || "[]");
-        
-        // Find by unique ID first, fall back to index
-        let targetIdx = bookings.findIndex(b => b.id === idOrIdx);
-        if (targetIdx === -1 && bookings[idOrIdx]) {
-            targetIdx = idOrIdx;
+    window.updateStatus = async function(idOrIdx, status) {
+        try {
+            await fetch("/api/bookings", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: idOrIdx, status })
+            });
+        } catch (e) {
+            console.log("Server update error", e);
         }
 
-        if (targetIdx > -1 && bookings[targetIdx]) {
-            bookings[targetIdx].status = status;
-            localStorage.setItem("sa_bookings", JSON.stringify(bookings));
-            loadAdminBookings();
+        const localBookings = JSON.parse(localStorage.getItem("sa_bookings") || "[]");
+        let targetIdx = localBookings.findIndex(b => b.id === idOrIdx);
+        if (targetIdx > -1) {
+            localBookings[targetIdx].status = status;
+            localStorage.setItem("sa_bookings", JSON.stringify(localBookings));
         }
+
+        loadAdminBookings();
     };
 </script>
 </body>

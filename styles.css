@@ -390,10 +390,10 @@ img{max-width:100%;display:block}
   .footer-legal{justify-content:center}
   .contact-info h3{font-size:22px}
   .contact-links{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .contact-item{padding:8px 12px;border-radius:10px;gap:8px;min-height:auto}
-  .contact-icon{width:32px;height:32px;font-size:13px;border-radius:6px}
-  .contact-item strong{font-size:12px}
-  .contact-item span{font-size:10px}
+  .contact-item{padding:8px 10px;border-radius:10px;gap:6px;min-height:auto;min-width:0;overflow:hidden}
+  .contact-icon{width:32px;height:32px;font-size:13px;border-radius:6px;flex-shrink:0}
+  .contact-item strong{font-size:12px;display:block}
+  .contact-item span{font-size:9.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
   .map-block{min-height:280px;padding:30px 20px}
   .fab-whatsapp{bottom:16px;right:16px;width:50px;height:50px;font-size:24px}
 }
