@@ -912,17 +912,25 @@ img{max-width:100%;display:block}
 }
 @media(max-width: 600px) {
   .sticky-action-bar {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    justify-content: space-between;
-    padding: 6px 8px;
+    left: auto;
+    right: 16px;
+    bottom: 20px;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 10px;
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    padding: 0;
   }
   .sticky-btn {
-    flex: 1;
-    justify-content: center;
-    padding: 10px 8px;
+    flex: initial;
+    padding: 10px 16px;
     font-size: 11px;
+    border-radius: 30px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   }
 }
 
